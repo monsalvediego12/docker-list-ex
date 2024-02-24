@@ -13,6 +13,8 @@ services:
       - "3306:3306"
     networks:
       - mynetwork
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
 
   apache_server:
     build: ./apache
@@ -34,7 +36,7 @@ services:
       - DB_USERNAME=root
       - DB_DATABASE=laravel_e1
     volumes:
-      - './app01:/app'
+      - './laravel-apps/app01:/app'
     depends_on:
       - mariadb
     networks:
