@@ -1,0 +1,44 @@
+version: '3'
+services:
+
+  mariadb:
+    build: ./mariadb
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+      - mynetwork
+
+  apache_server:
+    build: ./apache
+    container_name: apache_server
+    volumes:
+      - ./apache/www/html:/var/www/html
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+
+  app01:
+    image: docker.io/bitnami/laravel:10
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_DATABASE=laravel_e1
+    volumes:
+      - './app01:/app'
+    depends_on:
+      - mariadb
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
