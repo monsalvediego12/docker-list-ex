@@ -8,6 +8,8 @@ abcd.1234
 
 - docker-compose up -d
 
+http://localhost:8069/web/database/selector
+
 ### crear modulos
 
 - Ingresar al contenedor como root

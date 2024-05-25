@@ -19,6 +19,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Instalar módulo mysqli
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo gd
 
 # Instalar Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
